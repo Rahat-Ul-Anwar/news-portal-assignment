@@ -10,6 +10,8 @@ const loadNewsCategory = () => {
 }
 // display News Category 
 const disPlayNewsCategory = categories => {
+    
+    
 
     // console.log(categories);
     const categoryName = document.getElementById('category-name');
@@ -31,6 +33,8 @@ const disPlayNewsCategory = categories => {
 //load single news using id
 
 const loadingNews = (categoryId) => {
+    toggleSpinner(true);
+
 
     fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`)
         .then(res => res.json())
@@ -46,6 +50,8 @@ const loadingNews = (categoryId) => {
  
 const displayNews = (allNews) => {
 
+    
+
     // console.log(allNews);
     //news found
     const newsFound = document.getElementById('news-found');
@@ -55,6 +61,8 @@ const displayNews = (allNews) => {
     
    
     allNews.forEach(news => {
+
+        
         
         const containerDiv = document.createElement('div');
         containerDiv.classList.add('col-sm-3');
@@ -147,6 +155,7 @@ const displayNews = (allNews) => {
         newsContainer.appendChild(rowDiv);
        })
  
+    toggleSpinner(false);
 }
 
 const loadNewsDetails = (newsId) => {
@@ -173,13 +182,25 @@ const displayNewsDetails = (newsDetails) => {
                                <img class="img-fluid" src=" ${newsDetails.image_url}"/>
                                <br/> <br/>
                                <p> Total views: ${newsDetails.total_view} </p>
-                               
-                               
-                               
                                `
-    
-    
-    
+}
+
+
+// toggle spinner
+
+const toggleSpinner = (isLoading) => {
+
+    const sectionLoader = document.getElementById('loader');
+    if (isLoading) {
+        sectionLoader.classList.remove('d-none');
+    }
+
+    else {
+        
+        sectionLoader.classList.add('d-none');
    }
+
+
+}
 
 loadNewsCategory();
