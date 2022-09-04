@@ -49,16 +49,13 @@ const loadingNews = categoryId => {
 }
 
  
-// data.data.sort(function (a, b) {
-//     return b - a;
-// });
- 
+   
 
 
 const displayNews = (allNews) => {
 
-  
-    //************************news found or not section***********************
+   
+//************************news found or not section***********************
 
     console.log(allNews);
 
@@ -66,9 +63,17 @@ const displayNews = (allNews) => {
     const newsText = newsFound.innerText;
     const newsNum = parseInt(newsText);
     newsFound.innerText = allNews.length ? allNews.length : "No news found";
+
+   // sorting the total views
+    
+    allNews.sort(function (a, b) {
+        return b.total_view - a.total_view;
+    });
     
    
     allNews.forEach(news => {
+
+    
         // console.log(news)
         const containerDiv = document.createElement('div');
         containerDiv.classList.add('col-sm-3');
@@ -86,7 +91,7 @@ const displayNews = (allNews) => {
          `;
 
 
-        // row d-flex align-items-center
+        
         const div1 = document.createElement('div');
         div1.classList.add("row", "d-flex", "align-items-center");
         
@@ -106,18 +111,12 @@ const displayNews = (allNews) => {
         <br>                               
         <small> ${news.author.published_date ? news.author.published_date : "no date found"} </small> 
                             
-        `;  
-        
-        
-                                     
+        `;
         div3.appendChild(div4);
 
         div2.appendChild(div3);
         div1.appendChild(div2);
 
-                        
-        // console.log(div1)
-            
         const div5 = document.createElement('div');
         div5.classList.add('col-sm-3');
 
