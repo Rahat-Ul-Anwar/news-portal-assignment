@@ -54,11 +54,11 @@ const loadingNews = categoryId => {
 // });
  
 
-//************************news found or not section***********************
+
 const displayNews = (allNews) => {
 
   
-    
+    //************************news found or not section***********************
 
     console.log(allNews);
 
@@ -69,7 +69,7 @@ const displayNews = (allNews) => {
     
    
     allNews.forEach(news => {
-        console.log(news)
+        // console.log(news)
         const containerDiv = document.createElement('div');
         containerDiv.classList.add('col-sm-3');
         containerDiv.innerHTML = `
@@ -161,6 +161,9 @@ const displayNews = (allNews) => {
      
         const rowDiv = document.createElement('div');
         rowDiv.classList.add("row", "m-4"); 
+        rowDiv.style.boxShadow = "rgba(149, 157, 165, 0.2) 0px 8px 24px";
+      
+        rowDiv.style.padding = "10px";
         rowDiv.appendChild(containerDiv);
         rowDiv.appendChild(containerDiv2);
         newsContainer.appendChild(rowDiv);
@@ -182,7 +185,9 @@ const loadNewsDetails = (newsId) => {
 
 
 const displayNewsDetails = (newsDetails) => {
+
     // console.log(newsDetails)
+
 // ***********************modal section *************************
     const modalTitle = document.getElementById('staticBackdropLabel');
     modalTitle.innerText = newsDetails.title;
@@ -190,9 +195,11 @@ const displayNewsDetails = (newsDetails) => {
 
     const phoneDetails = document.getElementById('phone-details');
     phoneDetails.innerHTML = `
-                               <p> Author Name:<strong> ${newsDetails.author.name}</strong> </p>
-                               <p> Published date: ${newsDetails.author.published_date}</p>
                                <img class="img-fluid" src=" ${newsDetails.image_url}"/>
+                               <p> Author Name:<strong> ${newsDetails.author.name ? newsDetails.author.name :"no name found"}</strong> </p>
+                               <p>${newsDetails.details}</p>
+                               <p> Published date: ${newsDetails.author.published_date ?newsDetails.author.published_date : "no published date found"}</p>
+                               
                                <br/> <br/>
                                <p> Total views: ${newsDetails.total_view} </p>
                                `
