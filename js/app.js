@@ -102,16 +102,18 @@ const displayNews = (allNews) => {
 
         div4.innerHTML = `
         
-        <small><strong>${news.author.name}</strong></small>
-                                        <br>
-        <small> ${news.author.published_date} </small> 
-                            `;  
+        <small><strong>${news.author.name ? news.author.name : "no name found"}</strong></small>
+        <br>                               
+        <small> ${news.author.published_date ? news.author.published_date : "no date found"} </small> 
+                            
+        `;  
         
         
                                      
         div3.appendChild(div4);
 
         div2.appendChild(div3);
+        div1.appendChild(div2);
 
                         
         // console.log(div1)
