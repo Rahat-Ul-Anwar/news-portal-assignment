@@ -1,10 +1,20 @@
-.img-size{
-width: 244px;
-height: 300px;
-border-radius: 10px;
+ .brand-color{
+    color: white;
+    font-weight: 600;
+    font-size: 25px;
+    background-color: brown;
+    padding: 5px;
+    border-radius: 10px;
+ }
 
 
-}
+ .news-design{
+
+    color: brown;
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: underline;
+ }
 
 p{
     text-overflow: ellipsis;
