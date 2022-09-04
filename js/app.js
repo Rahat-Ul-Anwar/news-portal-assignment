@@ -1,14 +1,15 @@
 
-// load News Category 
+//************************** */ load News Category ****************************
 
 const loadNewsCategory = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
         .then(res => res.json())
-        .then(data => disPlayNewsCategory(data.data.news_category));
+        .then(data => disPlayNewsCategory(data.data.news_category))
+        .catch(error => console.log(error))
        
     
 }
-// display News Category 
+// ****************display News Category **************************
 const disPlayNewsCategory = categories => {
     
     
@@ -30,30 +31,28 @@ const disPlayNewsCategory = categories => {
 }
 
 
-//load single news using id
+//******************************load single news using id***********************
 
-const loadingNews = (categoryId) => {
+const loadingNews = categoryId => {
     toggleSpinner(true);
 
 
     fetch(`https://openapi.programming-hero.com/api/news/category/${categoryId}`)
         .then(res => res.json())
-        
-        .then(data => displayNews(data.data)); 
+        .then(data => displayNews(data.data))
+        .catch(error => console.log(error))
      
 }
 
-//news found
-
-
-
  
-const displayNews = (allNews) => {
 
+//************************news found or not section***********************
+const displayNews = (allNews) => {
+  
     
 
     // console.log(allNews);
-    //news found
+
     const newsFound = document.getElementById('news-found');
     const newsText = newsFound.innerText;
     const newsNum = parseInt(newsText);
@@ -136,7 +135,8 @@ const displayNews = (allNews) => {
             
         const div7 = document.createElement('div');
         div7.classList.add('col-sm-3');
-    // News detail using button click
+
+    //*************************** News detail using Show more button click*********************
         div7.innerHTML = `
         <button onclick="loadNewsDetails('${news._id}')" class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Show More</button>
      
@@ -169,15 +169,15 @@ const loadNewsDetails = (newsId) => {
 
 
 const displayNewsDetails = (newsDetails) => {
-    console.log(newsDetails)
-
+    // console.log(newsDetails)
+// ***********************modal section *************************
     const modalTitle = document.getElementById('staticBackdropLabel');
     modalTitle.innerText = newsDetails.title;
     // console.log(modalTitle)
 
     const phoneDetails = document.getElementById('phone-details');
     phoneDetails.innerHTML = `
-                               <p> Author Name: ${newsDetails.author.name}</p>
+                               <p> Author Name:<strong> ${newsDetails.author.name}</strong> </p>
                                <p> Published date: ${newsDetails.author.published_date}</p>
                                <img class="img-fluid" src=" ${newsDetails.image_url}"/>
                                <br/> <br/>
@@ -186,7 +186,7 @@ const displayNewsDetails = (newsDetails) => {
 }
 
 
-// toggle spinner
+// ********************************toggle spinner*************************
 
 const toggleSpinner = (isLoading) => {
 
@@ -202,5 +202,7 @@ const toggleSpinner = (isLoading) => {
 
 
 }
+
+//Calling Main Function
 
 loadNewsCategory();
