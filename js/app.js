@@ -42,9 +42,11 @@ const loadingNews = (categoryId) => {
 //news found
 
 
-const newsContainer = document.getElementById('news-container');
+
  
 const displayNews = (allNews) => {
+
+    // console.log(allNews);
     //news found
     const newsFound = document.getElementById('news-found');
     const newsText = newsFound.innerText;
@@ -54,66 +56,130 @@ const displayNews = (allNews) => {
    
     allNews.forEach(news => {
         
-        // const containerDiv = document.createElement('div');
-        // containerDiv.classList.add('col-sm-3');
-        // containerDiv.innerHTML = `
-        // <img src="${news.image_url}" alt="" srcset="">
+        const containerDiv = document.createElement('div');
+        containerDiv.classList.add('col-sm-3');
+        containerDiv.innerHTML = `
+        <img class="img-fluid img-size" src="${news.image_url}" alt="" srcset="">
         
-        // `;
+        `;
+        
+        const containerDiv2 = document.createElement('div');
+        containerDiv2.classList.add('col-sm-9');
+        containerDiv2.innerHTML = `
+            <h5>${news.title}</h5>
+            <p> ${news.details.slice(0, 300)}...</p>
+            
+         `;
+
+
+        // row d-flex align-items-center
+        const div1 = document.createElement('div');
+        div1.classList.add("row", "d-flex", "align-items-center");
+        
+        const div2 = document.createElement('div');
+        div2.classList.add('col-sm-3');
+
+        const div3 = document.createElement('div');
+        div3.classList.add("d-flex", "align-items-center");
+        div3.innerHTML = `<img class="img-fluid thumb-img" src="${news.thumbnail_url}">`;
+         
+        const div4 = document.createElement('div');
+        div4.classList.add("mx-2");
+
+        div4.innerHTML = `
+        
+        <small><strong>${news.author.name}</strong></small>
+                                        <br>
+        <small> ${news.author.published_date} </small> 
+                            `;  
         
         
+                                     
+        div3.appendChild(div4);
+
+        div2.appendChild(div3);
+
+                        
+        // console.log(div1)
+            
+        const div5 = document.createElement('div');
+        div5.classList.add('col-sm-3');
+
+        div5.innerHTML = ` <i class="fa-regular fa-eye"></i>
+        1.5 M`;
+        div1.appendChild(div5);
+         
+        
+            
+        const div6 = document.createElement('div');
+        div6.classList.add('col-sm-3');
+
+        div6.innerHTML = `
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        <i class="fa-regular fa-star"></i>
+        `;
+        
+        div1.appendChild(div6);
+            
+        // console.log(div1)
+            
+        const div7 = document.createElement('div');
+        div7.classList.add('col-sm-3');
+    // News detail using button click
+        div7.innerHTML = `
+        <button onclick="loadNewsDetails('${news._id}')" class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Show More</button>
      
+        `;
         
-        
-        // const containerDiv2 = document.createElement('div');
-        // containerDiv2.classList.add('col-sm-9');
-        // containerDiv.innerHTML = `
-        // <h3>The best fashion influencers to follow for sartorial inspiration</h3>
-        //                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde iste exercitationem officia deleniti doloremque asperiores quos velit voluptatibus iure architecto </p>
+        div1.appendChild(div7);
 
-        //                 <div class="row d-flex align-items-center">
-        //                     <div class="col-sm-3">
-        //                         <div class="d-flex align-items-center">
-        //                             <img src="images/Rectangle 19.png" alt="" srcset="">
-                                    
-        //                               <div class="mx-2">
-        //                                 <small><strong>Jane Cooper</strong></small>
-        //                                 <br>
-        //                                 <small>Jan 10, 2022 </small>
-        //                               </div>
-        //                         </div>
-        //                     </div>
-        //                     <div class="col-sm-3">
-        //                         <i class="fa-regular fa-eye"></i>
-        //                         1.5 M
-        //                     </div>
-        //                     <div class="col-sm-3">
-        //                         <i class="fa-regular fa-star"></i>
-        //                         <i class="fa-regular fa-star"></i>
-        //                         <i class="fa-regular fa-star"></i>
-        //                         <i class="fa-regular fa-star"></i>
-        //                         <i class="fa-regular fa-star"></i>
-        //                     </div>
-        //                     <div class="col-sm-3">
-        //                        <button class="btn btn-danger px-4">Show More</button>
-        //                     </div>
-        //                 </div>
-        
-        // `;
-
-        // const rowDiv = document.createElement('div');
-        // rowDiv.classList.add('row');
-        // rowDiv.appendChild(containerDiv);
-        // rowDiv.appendChild(containerDiv2);
-        // newsContainer.appendChild(rowDiv);
-    
-      })
+        containerDiv2.appendChild(div1);
+       
+            
+        const newsContainer = document.getElementById('news-container');
+        const rowDiv = document.createElement('div');
+        rowDiv.classList.add("row", "m-4"); 
+        rowDiv.appendChild(containerDiv);
+        rowDiv.appendChild(containerDiv2);
+        newsContainer.appendChild(rowDiv);
+       })
  
 }
 
+const loadNewsDetails = (newsId) => {
+    fetch(`https://openapi.programming-hero.com/api/news/${newsId}`)
+        .then(res => res.json())
+        
+        .then(data => displayNewsDetails(data.data[0])); 
+    
+    
+}
 
 
+const displayNewsDetails = (newsDetails) => {
+    console.log(newsDetails)
 
+    const modalTitle = document.getElementById('staticBackdropLabel');
+    modalTitle.innerText = newsDetails.title;
+    // console.log(modalTitle)
 
+    const phoneDetails = document.getElementById('phone-details');
+    phoneDetails.innerHTML = `
+                               <p> Author Name: ${newsDetails.author.name}</p>
+                               <p> Published date: ${newsDetails.author.published_date}</p>
+                               <img class="img-fluid" src=" ${newsDetails.image_url}"/>
+                               <br/> <br/>
+                               <p> Total views: ${newsDetails.total_view} </p>
+                               
+                               
+                               
+                               `
+    
+    
+    
+   }
 
 loadNewsCategory();

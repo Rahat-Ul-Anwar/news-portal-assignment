@@ -1,0 +1,16 @@
+.img-size{
+width: 244px;
+height: 300px;
+border-radius: 10px;
+
+
+}
+
+p{
+    text-overflow: ellipsis;
+}
+
+.thumb-img{
+width: 40px;
+height: 40px;
+}
