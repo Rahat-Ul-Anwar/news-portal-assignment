@@ -15,6 +15,7 @@
   </head>
 </head>
 <body>
+   <!-- **************************navbar section start**************** -->
     <header>
         <div class="container">
 
@@ -59,16 +60,17 @@
               <!-- News Category section end -->
         </div>
 
-        <!-- category found section start -->
-         <section class="my-4">
-            <div class="container">
-                <h5 > <span id="news-found">0</span> items found for category</h5>
+        <!-- *****************category found section start****************** -->
+         <section class=" container my-4 ">
+            <div class=" p-2 bg-danger">
+                <h5 class="text-white"> <span id="news-found">0</span> items found for category</h5>
             </div>
          </section>
-        <!-- category found section end -->
+        <!-- ***************category found section end******************** -->
     </header>
  
      <main>
+      <!--************************** Loading spinner section start ****************************-->
       <section id="loader" class="d-none">
         <div class="d-flex justify-content-center">
             <div class="spinner-border text-danger" role="status">
@@ -76,7 +78,9 @@
             </div>
           </div>
      </section>
+      <!--************************* Loading spinner section end************************ -->
 
+      <!-- ****************showing news in ui section start******************* -->
       </section>
         <section class="my-5">
             <div class="container" id="news-container">
@@ -122,8 +126,9 @@
             </div>
 
         </section>
+        <!-- ****************showing news in ui section end******************* -->
 
-        <!-- Modal section -->
+        <!--******************************** Modal section start****************************************** -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -135,13 +140,14 @@
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                    
                 </div>
               </div>
             </div>
           </div>
 
+        <!--******************************** Modal section end****************************************** -->
 
     </main>
 
