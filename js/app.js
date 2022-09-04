@@ -32,8 +32,12 @@ const disPlayNewsCategory = categories => {
 
 
 //******************************load single news using id***********************
-
+const newsContainer = document.getElementById('news-container');
 const loadingNews = categoryId => {
+    //clear body 
+    newsContainer.textContent = '';
+
+    // start loading spinner
     toggleSpinner(true);
 
 
@@ -147,13 +151,15 @@ const displayNews = (allNews) => {
         containerDiv2.appendChild(div1);
        
             
-        const newsContainer = document.getElementById('news-container');
+     
         const rowDiv = document.createElement('div');
         rowDiv.classList.add("row", "m-4"); 
         rowDiv.appendChild(containerDiv);
         rowDiv.appendChild(containerDiv2);
         newsContainer.appendChild(rowDiv);
-       })
+    })
+    
+     // loading spinner stop
  
     toggleSpinner(false);
 }
